@@ -1,0 +1,30 @@
+@startuml
+title Service "Cinema Abyss" Context diagram
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "Ноутбуки, смарт ТВ, мобильные устройства")
+
+System_Ext(paymentSystem, "Платежная система", "Проведение платежей пользователей", "Java")
+System_Ext(onlineCinema, "Онлайн-кинотеатры", "", "Java")
+Container_Boundary(cinemaService, "Service 'Cinema Abyss'") {
+    Container(backend, "Service", "Go", "Основной сервис 'КиноБездна'")
+    Container(database, "Database", "PostgreSql", "Хранит данные")
+}
+System_Ext(s3, "S3 storage", "Хранит медиафайлы")
+System_Boundary(recommendSystem, "Рекомендательная система") {
+    Container(broker, "Брокер", "Rabbit MQ", "Брокер сообщений обмена")
+    System_Ext(externalRecommendSystem, "Внешняя рекомендательная система", "")
+}
+
+Rel(user, backend, "", "HTTP")
+Rel(backend, database, "", "CRUD")
+Rel(backend, s3, "", "Base64")
+Rel(backend, broker, "", "AMQP")
+Rel(broker, externalRecommendSystem, "", "AMQP")
+Rel(backend, paymentSystem, "", "JSON")
+Rel(backend, onlineCinema, "", "JSON")
+
+@enduml
