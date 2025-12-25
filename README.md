@@ -115,6 +115,9 @@ GitHub Actions для непрерывной интеграции и разве�
    docker-compose up -d
    ```
 
+[Скриншот прохождения тестов Postman локально](/screenshots/AllTestsPassedInLocal.png)
+[Скриншот состояния топиков Kafka после прохождения_тестов](/screenshots/KafkaConsumersAfterAllTestsPassedLocal.png)
+
 ### Kubernetes Deployment
 
 #### Требования
