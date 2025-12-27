@@ -115,9 +115,6 @@ GitHub Actions для непрерывной интеграции и разве�
    docker-compose up -d
    ```
 
-[Скриншот прохождения тестов Postman локально](/screenshots/AllTestsPassedInLocal.png)
-[Скриншот состояния топиков Kafka после прохождения_тестов](/screenshots/KafkaConsumersAfterAllTestsPassedLocal.png)
-
 ### Kubernetes Deployment
 
 #### Требования
@@ -225,3 +222,6 @@ chmod +x run-tests.sh
 2. Протестируйте постепенный переход, изменив переменную окружения MOVIES_MIGRATION_PERCENT в файле docker-compose.yml.
 
 3. Проверьте топики Kafka и сообщения через Kafka UI по адресу http://localhost:8090
+   
+[Скриншот прохождения тестов Postman локально](/screenshots/AllTestsPassedInLocal.png)
+[Скриншот состояния топиков Kafka после прохождения_тестов](/screenshots/KafkaConsumersAfterAllTestsPassedLocal.png)
