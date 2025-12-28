@@ -21,38 +21,38 @@ spec:
         app: proxy-service
     spec:
       containers:
-        - name: proxy-service
-          image: ghcr.io/art-respublica/architecture-pro-cinemaabyss/proxy-service:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8000
-          env:
-            - name: PORT
-              value: "8000"
-          envFrom:
-            - configMapRef:
-                name: cinemaabyss-config
-            - secretRef:
-                name: cinemaabyss-secrets
-          resources:
-            limits:
-              cpu: "300m"
-              memory: "256Mi"
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 15
-            periodSeconds: 20
+      - name: proxy-service
+        image: ghcr.io/art-respublica/architecture-pro-cinemaabyss/proxy-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        envFrom:
+        - configMapRef:
+            name: cinemaabyss-config
+        - secretRef:
+            name: cinemaabyss-secrets
+        resources:
+          limits:
+            cpu: "300m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
       restartPolicy: Always
       imagePullSecrets:
         - name: dockerconfigjson
@@ -66,6 +66,6 @@ spec:
   selector:
     app: proxy-service
   ports:
-    - port: 8000
-      targetPort: 8000
+  - port: 8000
+    targetPort: 8000
   type: ClusterIP
