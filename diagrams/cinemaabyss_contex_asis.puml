@@ -1,0 +1,20 @@
+@startuml
+title Service "Cinema Abyss" Context diagram
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "User", "Ноутбуки, смарт ТВ, мобильные устройства")
+System(backend, "Service", "Основной сервис 'КиноБездна' (Go)")
+
+System_Ext(recommendSystem, "Рекомендательная система", "")
+System_Ext(paymentSystem, "Платежная система", "")
+System_Ext(onlineCinema, "Онлайн-кинотеатры", "")
+
+Rel(user, backend, "", "HTTP")
+Rel(backend, paymentSystem, "", "HTTP")
+Rel(backend, onlineCinema, "", "HTTP")
+Rel(backend, recommendSystem, "", "AMQP")
+
+@enduml

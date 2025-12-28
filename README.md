@@ -1,7 +1,7 @@
 # Архитектура микросервисов CinemaAbyss
 
 ## Обзор.
- В проекте реализована следующая функциональность:
+В проекте реализована следующая функциональность:
 
 - Извлечение микросервисов с использованием паттерна Strangler Fig
 - Развертывание в Kubernetes для оркестрации и масштабирования
@@ -133,6 +133,9 @@ kubectl apply -f src/kubernetes/kafka/kafka.yaml
 ```
 3. Разверните базу данных:
 ```bash
+kubectl apply -f src/kubernetes/configmap.yaml
+kubectl apply -f src/kubernetes/postgres-init-configmap.yaml
+kubectl apply -f src/kubernetes/secret.yaml
 kubectl apply -f src/kubernetes/postgres.yaml
 ```
 4. Разверните монолит:
@@ -162,7 +165,7 @@ kubectl apply -f src/kubernetes/proxy-service.yaml
 3. Выполните ручное или автоматическое развертывание (Helm) в локальной среде
 
 ## Тестирование API с Postman
-Проект включает комплексный набор тестов Postman, которые можно запускать из командной строки с помощью Newman. 
+Проект включает комплексный набор тестов Postman, которые можно запускать из командной строки с помощью Newman.
 
 Тесты проверяют базовую функциональность всех сервисов в архитектуре.
 
@@ -199,7 +202,7 @@ npm run test:docker
 ```
 4. Запуск тестов с помощью shell-скрипта
 1. Сделайте скрипт исполняемым
-chmod +x run-tests.sh
+   chmod +x run-tests.sh
 
 2. Запустите все тесты
 ```bash

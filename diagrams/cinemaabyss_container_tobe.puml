@@ -1,0 +1,65 @@
+@startuml
+title Service "Cinema Abyss" Context diagram
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "Ноутбуки, смарт ТВ, мобильные устройства")
+Container(frontend, "Frontend", "Javascript", "Функциональности сервиса, улучшающая клиентский опыт в браузере")
+Person(devices, "Devices", "Смарт ТВ и мобильные устройства")
+
+Container_Boundary(cinemaService, "Service 'Cinema Abyss'") {
+    Container(gatewayApi, "Gateway Api (Proxy)", "Java", "Единая точка входа в backend сервиса 'КиноБездна'")
+    Container(moviesService, "Movies service", "Java", "Функциональность, связанная с фильмами")
+    Container(userService, "Users service", "Go", "Функциональность, связанная с пользователями")
+    Container(paymentService, "Payments service", "Go", "Функциональность, связанная с обработкой платежей")
+    Container(subscriptionService, "Subscriptions service", "Go", "Функциональность, связанная с подписками")
+    Container(eventService, "Events service", "Java", "Обрабатывает коммуникацию между сервисами")
+
+    Container(moviesDB, "db-movies", "PostgreSql", "Хранит данные")
+    Container(userDb, "db-users", "PostgreSql", "Хранит данные")
+    Container(paymentDb, "db-payments", "PostgreSql", "Хранит данные")
+    Container(subscriptionDB, "db-subscriptions", "PostgreSql", "Хранит данные")
+
+    Container(kafka, "Kafka", "Kafka", "Брокер межсервисного обмена")
+    Container(zookeeper, "Zookeeper", "Zookeeper", "Необходим для kafka")
+    Container(broker, "Rabbit MQ", "Rabbit MQ", "Брокер сообщений обмена c рекомендательной системой")
+}
+
+System_Ext(s3, "S3 storage", "Хранит медиафайлы")
+System_Ext(externalPaymentSystem, "Платежная система", "Проведение платежей пользователей", "Java")
+System_Ext(onlineCinema, "Онлайн-кинотеатры", "", "Java")
+System_Ext(externalRecommendSystem, "Внешняя рекомендательная система", "")
+
+
+Rel(user, frontend, "", "HTTP")
+Rel(frontend, gatewayApi, "", "HTTP")
+Rel(devices, gatewayApi, "", "HTTP")
+
+Rel(gatewayApi, moviesService, "", "HTTP")
+Rel(gatewayApi, userService, "", "HTTP")
+Rel(gatewayApi, paymentService, "", "HTTP")
+Rel(gatewayApi, subscriptionService, "", "HTTP")
+Rel(gatewayApi, eventService, "", "HTTP")
+
+Rel(moviesService, moviesDB, "", "CRUD")
+Rel(userService, userDb, "", "CRUD")
+Rel(paymentService, paymentDb, "", "CRUD")
+Rel(subscriptionService, subscriptionDB, "", "CRUD")
+
+Rel(moviesService, kafka, "", "JSON")
+Rel(userService, kafka, "", "JSON")
+Rel(paymentService, kafka, "", "JSON")
+Rel(subscriptionService, kafka, "", "JSON")
+Rel(eventService, kafka, "", "JSON")
+
+Rel(kafka, zookeeper, "", "")
+
+Rel(moviesService, s3, "", "Base64")
+Rel(moviesService, onlineCinema, "", "JSON")
+Rel(paymentService, externalPaymentSystem, "", "JSON")
+Rel(eventService, broker, "", "AMQP")
+Rel(broker, externalRecommendSystem, "", "AMQP")
+
+@enduml

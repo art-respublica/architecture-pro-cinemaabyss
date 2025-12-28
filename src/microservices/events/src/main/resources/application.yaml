@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: events-service
+  kafka:
+    bootstrap-servers: kafka:9092
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /
+      path-mapping:
+        health: health
+    health:
+      show-details: always
+
+logging:
+  level:
+    org:
+      zalando:
+        logbook: TRACE
