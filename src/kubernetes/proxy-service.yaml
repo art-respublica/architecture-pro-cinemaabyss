@@ -50,18 +50,18 @@ spec:
             memory: "512Mi"
           requests:
             cpu: "100m"
-            memory: "128Mi"
+            memory: "256Mi"
         readinessProbe:
           httpGet:
             path: /health
             port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
+          initialDelaySeconds: 45
+          periodSeconds: 20
         livenessProbe:
           httpGet:
             path: /health
             port: 8000
-          initialDelaySeconds: 15
+          initialDelaySeconds: 45
           periodSeconds: 20
       restartPolicy: Always
       imagePullSecrets:
