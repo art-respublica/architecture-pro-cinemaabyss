@@ -77,8 +77,8 @@ metadata:
 spec:
   selector:
     app: proxy-service
-    ports:
-      - port: {{ .Values.proxyService.service.port }}
-        targetPort: {{ .Values.proxyService.service.targetPort }}
-    type: {{ .Values.proxyService.service.type }}
+  ports:
+  - port: {{ .Values.proxyService.service.port }}
+    targetPort: {{ .Values.proxyService.service.targetPort }}
+  type: {{ .Values.proxyService.service.type }}
 {{- end }}
