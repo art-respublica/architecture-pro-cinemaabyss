@@ -111,7 +111,7 @@ jobs:
 Как только сборка отработает и в github registry появятся ваши образы, можно переходить к блоку настройки Kubernetes
 Успешным результатом данного шага является "зеленая" сборка и "зеленые" тесты
 
-[Скриншот состояния топиков Kafka после прохождения_тестов](/screenshots/PR_CheckPassed.png)
+[Скриншот зеленой отметки о прохождении тестов github actions](/screenshots/PR_CheckPassed.png)
 
 ### Proxy в Kubernetes
 
@@ -245,6 +245,8 @@ cat .docker/config.json | base64
   proxy-service-577d6c549b-6qfcv    1/1     Running  
 
   zookeeper-0                       1/1     Running 
+
+[Скриншот о запуске состоянии подов после запуска всех сервисов](/screenshots/K8sCluster_AfterStart.png)
 
   8. Добавим ingress
 
