@@ -246,7 +246,7 @@ cat .docker/config.json | base64
 
   zookeeper-0                       1/1     Running 
 
-[Скриншот о запуске состоянии подов после запуска всех сервисов](/screenshots/K8sCluster_AfterStart.png)
+[Скриншот о состоянии подов после запуска всех сервисов](/screenshots/K8sCluster_AfterStart.png)
 
   8. Добавим ingress
 
@@ -278,8 +278,8 @@ cat .docker/config.json | base64
 #### Шаг 3
 Добавьте сюда скриншота вывода при вызове https://cinemaabyss.example.com/api/movies и  скриншот вывода event-service после вызова тестов.
 
-[Скриншот о запуске состоянии подов после запуска всех сервисов](/screenshots/CinemaAbyssExampleCom_Api_MoviesByBrowser.png)
-[Скриншот о запуске состоянии подов после запуска всех сервисов](/screenshots/RunTestKubernetesThroughNewman.png)
+[Скриншот о выводе списка фильмов в браузере](/screenshots/CinemaAbyssExampleCom_Api_MoviesByBrowser.png)
+[Скриншот о прохождении тестов после запуска всех сервисов](/screenshots/RunTestKubernetesThroughNewman.png)
 
 ## Задание 4
 Для простоты дальнейшего обновления и развертывания вам как архитектуру необходимо так же реализовать helm-чарты для прокси-сервиса и проверить работу 
@@ -355,6 +355,9 @@ minikube tunnel
 https://cinemaabyss.example.com/api/movies
 и приложите скриншот развертывания helm и вывода https://cinemaabyss.example.com/api/movies
 
+[Скриншот о выводе команды запуска развертывания через helm](/screenshots/HelmInstallCinemaAbyss_Pods.png)
+[Скриншот о состоянии подов после развертывания через helm](/screenshots/HelmInstallCinemaAbyss_Pods.png)
+[Скриншот о выводе списка фильмов в браузере](/screenshots/HelmInstallCinemaAbyss_Browser.png)
 
 # Задание 5
 Компания планирует активно развиваться и для повышения надежности, безопасности, реализации сетевых паттернов типа Circuit Breaker и канареечного деплоя вам как архитектору необходимо развернуть istio и настроить circuit breaker для monolith и movies сервисов.
