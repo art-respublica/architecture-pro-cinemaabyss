@@ -13,7 +13,7 @@ spec:
         http1MaxPendingRequests: 1  # Max pending HTTP1 requests
         maxRequestsPerConnection: 1 # Max requests per single HTTP1.1 connection
     outlierDetection:
-      consecutiveErrors: 2    # Number of consecutive errors before ejecting a host
+      consecutive5xxErrors: 2 # Number of consecutive errors before ejecting a host
       interval: 1s            # Interval between scans for ejected hosts
       baseEjectionTime: 3m    # Minimum time an ejected host remains in the pool
       maxEjectionPercent: 100 # Maximum % of hosts that can be ejected
