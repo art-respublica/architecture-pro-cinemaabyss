@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: cinemaabyss-circuit-breaker
+  namespace: cinemaabyss
+spec:
+  host: proxy-service.default.svc.cluster.local # The target service
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 10    # Max concurrent TCP connections to a backend
+      http:
+        http1MaxPendingRequests: 1  # Max pending HTTP1 requests
+        maxRequestsPerConnection: 1 # Max requests per single HTTP1.1 connection
+    outlierDetection:
+      consecutiveErrors: 2    # Number of consecutive errors before ejecting a host
+      interval: 1s            # Interval between scans for ejected hosts
+      baseEjectionTime: 3m    # Minimum time an ejected host remains in the pool
+      maxEjectionPercent: 100 # Maximum % of hosts that can be ejected
