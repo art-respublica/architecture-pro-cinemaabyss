@@ -173,10 +173,34 @@ ingress:
           pathType: Prefix
           service: proxy-service
           port: 80
-        - path: /api/events
+        - path: /api/events/movie
           pathType: Prefix
           service: events-service
           port: 8082
+        - path: /api/events/user
+          pathType: Prefix
+          service: events-service
+          port: 8082
+        - path: /api/events/payment
+          pathType: Prefix
+          service: events-service
+          port: 8082
+        - path: /api/movies
+          pathType: Prefix
+          service: movies-service
+          port: 8081
+        - path: /api/users
+          pathType: Prefix
+          service: monolith
+          port: 8080
+        - path: /api/payments
+          pathType: Prefix
+          service: monolith
+          port: 8080
+        - path: /api/subscriptions
+          pathType: Prefix
+          service: monolith
+          port: 8080
 
 # Application configuration
 config:
